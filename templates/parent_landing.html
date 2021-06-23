@@ -1,0 +1,23 @@
+    {% extends 'parenthome.html' %}
+    {%block title%}Parent Home {%endblock%}
+    {%block content%}
+    <div class = "container-fluid mt-5">
+        <div class = "row mt-5">
+        {%for children in user.children%}
+            <div class = "col-4" onclick="location.href='/child/{{children.id}}'">
+                <div class="card" style="width: 18rem;">
+                    <img src= "{{ url_for('static', filename='child.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{children.name}}</h5>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+            <div class = "col-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="/addChild" class="btn btn-primary">Add Child</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}

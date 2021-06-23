@@ -1,0 +1,25 @@
+{% extends 'adminhome.html' %}
+{% block content%}
+<div class="login" style="margin:50px;text-align: center;">
+    <div class="card" style="width: 26rem; height: 570px; text-align: center;margin-left: 450px;box-shadow: 2px 2px 4px #bdbdbd;">
+      <div class="card-body">
+        <b><h3>Register</h3><b><br>
+        <form action="{{ url_for('addAshaWorker') }}" method="post">
+          <input type="text" class="form-control" name='name' id='fname' placeholder="Name" style="margin-bottom: 10px;" value = {{data.name}}>
+          <!-- <input type="text" class="form-control" name='cname' id='lname' placeholder="Child's Name" style="margin-bottom: 10px;"> -->
+          <!-- <input type="date" class="form-control" name='dob' id='ph' placeholder="Mobile No." style="margin-bottom: 10px;"> -->
+          <input type="email" class="form-control" name='email' id='email' placeholder="Email" style="margin-bottom: 10px;" value = {{data.email}}>
+          
+          <input type="text" class="form-control" name='ph' id='ph' placeholder="Mobile No." style="margin-bottom: 10px;" value = {{data.ph}}>
+          <input type="text" class="form-control" name='city' id='city' placeholder="City" style="margin-bottom: 10px;" value = {{data.city}}>
+          <input type="text" class="form-control" name='pincode' id='ph' placeholder="Pincode" style="margin-bottom: 10px;" value = {{data.pincode}}>
+          
+          <!-- <input type="text" class="form-control" name='role' id='ph' placeholder="Role" style="margin-bottom: 10px;"> -->
+           <input type="hidden" class="form-control" name='userid' placeholder="User ID" style="margin-bottom: 10px;" value = {{data.userid}}>
+          <input type="password" class="form-control" name='password' id='password' placeholder="Password" style="margin-bottom: 10px;" value = {{data.password}}>
+          
+          <br><button type="submit" class="btn btn-dark" style="background-color:#e7305b ;color: white;border-color:#e7305b;">UPDATE</button>
+    
+  </form>
+  </div>  </div> </div> 
+{% endblock%}

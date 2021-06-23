@@ -1,0 +1,57 @@
+{% extends 'adminhome.html' %}
+
+{%block head%}
+<script src="https://use.fontawesome.com/0328a5b325.js"></script>
+<style>table, th, td {
+    margin: auto;
+    border: 1px solid black;
+    padding: 10px;
+    
+  }
+  .GFG {
+            background-color: white;
+            border: 2px solid black;
+            color:rgb(255, 0, 149);
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            margin: 10px 30px;
+            cursor: pointer;
+        }</style>
+{%endblock%}
+
+{% block content%}
+
+ <div class="container">    
+  <table class="table table-dark table-hover shadow-lg">
+    <thead>
+      <tr>
+        <th class="text-center font-weight-bolder  text-uppercase">Name</th>
+        <th class="text-center font-weight-bolder  text-uppercase">Email</th>
+      <th class="text-center font-weight-bolder  text-uppercase">Phone</th>
+      <th class="text-center font-weight-bolder  text-uppercase">City</th>
+        <th class="text-center font-weight-bolder text-uppercase">Pincode</th>
+        <th class="text-center font-weight-bolder text-uppercase">Update</th>
+        <th class="text-center font-weight-bolder text-uppercase">MoreInfo</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for i in ashaworkers:%}
+        <tr>
+          <td class="text-center">{{i.name}}</td>
+          <td class="text-center">{{i.email}}</td>
+          <td class="text-center">{{i.ph}}</td>
+          <td class="text-center">{{i.city}}</td>
+          <td class="text-center">{{i.pincode}}</td>
+          <td><a href = "{{url_for('update_worker',id = i._id)}}"><i class="fa fa-pencil" aria-hidden="true" style="color: #ffdb58"></i></td>
+        <td><a href = "{{url_for('children_associated_with_asha' , id = i.userid)}}" style="color: #ffdb58">click</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="container">
+<a href="{{url_for('addAsha')}}"><button class="btn btn-danger">Add Users</button></a>
+</div>
+{% endblock %}

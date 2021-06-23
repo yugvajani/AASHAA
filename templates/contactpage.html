@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>CONTACT US</title>
+    <style>
+      /*.tableDiv{
+        margin-left: 70px;
+        margin-right: 70px;
+      }*/
+      .mainBody{
+    height: 470px;
+    background-color: rgb(252, 250, 248);
+}
+.bottomBar{
+    height:30px;
+    background-color: rgb(50, 53, 53);
+}
+.topbar{
+    background-color: rgb(50, 53, 53); 
+    text-align: center;
+    color: white;
+    padding: 2px;
+    margin-top: 90px;
+    height: 60px;
+    padding: 20px;
+}
+.bottomText{
+    font-family: cursive;
+    text-align: center;
+    color: rgb(219, 202, 202);
+}
+.imgSize{
+    height: 470px;
+}
+body{
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(226,226,226);
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* utilities */
+.container{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* top header */
+
+/* navbar and logo */
+nav{
+  border-top: 2px solid rgb(95, 94, 94);
+  background-color: rgb(226,226,226);
+}
+.logo{
+  float: left;
+  width: 100px;
+}
+ul{
+  margin-left: 350px;
+  margin-top:-80px;
+}
+ul{
+  list-style-type: none;
+}
+li{
+  float: left;
+  font-size: 18px;
+  padding-top: 23px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 3% ;
+  margin-left: 40px;
+}
+ul li a{
+  padding: 13px;
+  text-decoration: none;
+  color: black;
+}
+ul li a:hover{
+  color: red;
+  transition: 0.9s;
+}
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="container" style="height: 200px">
+        <img src="{{url_for('static', filename='logo.jpg')}}" alt="" width="100" height="100"style="padding: 10px">
+            <ul>
+              <li><a href="{{url_for('home')}}">Home</a></li>
+              <li><a href="#">Vaccination</a></li>
+              <li><a href="{{url_for('login')}}">Forum</a></li>
+              <li><a href="{{url_for('register')}}">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="background-color: #8B008B; color: white; margin-top: 1px; margin-bottom: 30px;height: 70px">
+    <h2 style=" color:#fff;padding: 10px">Asha Workers</h2>
+  </div>    
+    <div class="container">    
+      <table class="table table-dark table-hover shadow-lg">
+        <thead>
+            {%for data in workerdata%}
+          <tr>
+            <th class="text-center font-weight-bolder  text-uppercase">Name</th>
+            <th class="text-center font-weight-bolder  text-uppercase">Email</th>
+            <th class="text-center font-weight-bolder  text-uppercase">Phone</th>
+            <th class="text-center font-weight-bolder  text-uppercase">Pincode</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td class="text-center">{{data.name}}</td>
+              <td class="text-center">{{data.email}}</td>
+              <td class="text-center">{{data.ph}}</td>
+              <td class="text-center">{{data.pincode}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="container" style="background-color: #8B008B; color: white; margin-top: 6%; margin-bottom: 30px;height: 70px">
+    <h2 style=" color:#fff;padding: 10px">Have any doubts? Ask Here</h2>
+  </div>
+    <div class="login" style="margin:50px;text-align: center;">
+        <div class="card" style="width: 26rem; height: 400px; text-align: center;margin-left: 400px;box-shadow: 2px 2px 4px #bdbdbd;">
+          <div class="card-body">
+            <b><h3>Got a question?</h3><b><br>
+            <form action="{{ url_for('getContact') }}" method="post">
+                <textarea rows = "9" cols = "40" name = "message" id = "message" placeholder="Enter your question">
+                 </textarea>
+              
+              <br>
+              <button type = "submit" class="btn btn-primary active" style="background-color:#e7305b ;color: white;border-color:#e7305b;"aria-current="page">submit</button>
+            </form>
+      </div>  
+  </div> 
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+    
+.mainBody{
+    height: 470px;
+    background-color: rgb(252, 250, 248);
+    
+}
+.bottomBar{
+    height:30px;
+    background-color: rgb(50, 53, 53);
+}
+.topbar{
+    background-color: rgb(50, 53, 53); 
+    text-align: center;
+    color: white;
+    padding: 2px;
+    margin-top: 90px;
+    height: 60px;
+    padding: 20px;
+}
+.bottomText{
+    font-family: cursive;
+    text-align: center;
+    color: rgb(219, 202, 202);
+}
+.imgSize{
+    height: 470px;
+}
+body{
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(226,226,226);
+  font-family: sans-serif;
+  line-height: 1.5;
+  
+}
+
+/* utilities */
+.container{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* top header */
+
+/* navbar and logo */
+nav{
+  border-top: 2px solid rgb(95, 94, 94);
+  background-color: rgb(226,226,226);
+}
+.logo{
+  float: left;
+  width: 100px;
+}
+ul{
+  margin-left: 450px;
+  margin-top:-80px;
+}
+ul{
+  list-style-type: none;
+}
+li{
+  float: left;
+  font-size: 18px;
+  padding-top: 23px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 3% ;
+  margin-left: 40px;
+}
+ul li a{
+  padding: 13px;
+  text-decoration: none;
+  color: black;
+}
+ul li a:hover{
+  color: red;
+  transition: 0.9s;
+}
+
+/* heading section */
+#headings{
+  background: linear-gradient(rgba(0,0,10,0.5), rgba(0,0,10,0.5)), url(../imgs/fitness2.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.centered{
+  position:absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+}
+.btn{
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px;
+  border: 2px solid coral;
+  cursor: pointer;
+  border-radius: 50px;
+  text-align: center;
+  background-color:red;
+  width: 15%;
+}
+.btn:hover{
+  font-size: 18px;
+  transition: .8s;
+  background-color: unset;
+}
+.dropbtn {
+  color: black;
+  padding: 16px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.box{
+  margin-top: 15%;
+  width: 600px;
+  height: auto;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  border:solid black 3px;
+
+  /*background: #505050;*/
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "text"],.box input[type = "text"],.box input[type = "password"],.box input[type = "number"],.box input[type="date"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid: #3498db;
+  border-color: #3498db;
+  padding: 14px 10px;
+  width: 400px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s; 
+}
+.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "password"]:focus,.box input[type = "number"]:focus,.box input[type="date"]:focus{
+  width: 460px;
+  border-color: #2ecc71;
+}
+.box button[type ="submit"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid:#2ecc71;
+  border-color: #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s; 
+  cursor: pointer;
+}
+.box button[type ="submit"]{
+  background:#FF1493;
+}
+</style>
+<script>
+    $(document).ready(function()
+    {
+        $("button").click(function()
+        {
+        $("#firstname_error").hide();
+        $("#lasttname_error").hide();
+        $("#mobile_error").hide();
+        $("#email_error").hide();
+        $("#password_error").hide();
+        $("#retype_password_error").hide();
+
+      var error_firstname=false;
+      var error_lasttname=false;
+      var error_mobile=false;
+      var error_email=false;
+      var error_password=false;
+      var error_retype_password=false;
+
+      $("#form_firstname").focusout(function(){
+        check_firstname();
+      });
+
+      $("#form_lasstname").focusout(function(){
+        check_lastname();
+      });
+
+      $("#form_mobile").focusout(function(){
+        check_mobile();
+      });
+
+      $("#form_email").focusout(function(){
+        check_email();
+      });
+      $("#form_password").focusout(function(){
+        check_password();
+      });
+      $("#form_retype_password").focusout(function(){
+        check_retype_password();
+      });
+      function check_firstname(){
+        var fname=new RegExp(/^[+a-zA-Z]+$/i);
+        if(fname.test($("#form_firstname").val())){
+          $("#firstname_error").hide();
+        }else{
+          $("#firstname_error").html("Invalid email address");
+          $("#firstname_error").show();
+          error_firstname=true;
+        }
+      }
+      function check_mobile(){
+        var mobile=new RegExp(/^[0-9]{10}$/i);
+        if(mobile.test("#form_mobile").val()){
+          $("#mobile_error").hide();
+        }else{
+          $("#mobile_error").html("Invalid email address");
+          $("#mobile_error").show();
+          error_mobile=true;
+        }
+      }
+      
+      function check_email(){
+        var pattern=new RegExp(/^[+a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/i);
+        if(pattern.test("#form_email").val()){
+          $("#email_error").hide();
+        }else{
+          $("#email_error").html("Invalid email address");
+          $("#email_error").show();
+          error_email=true;
+        }
+      }
+      function check_password(){
+        var password_length = $("#form_password").val().length;
+        if(password_length<8){
+          $("#password_error").html("At least 8 characters");
+          $("#password_error").show();
+          error_password=true;
+        }
+        else{
+          $("#password_error").hide();
+        }
+      }
+      function check_retype_password(){
+        var password= $("#form_password").val();
+        var retype_password= $("#form_retype_password").val();
+        if(password!= retype_password){
+          $("#retype_password_error").html("Passwords do not match");
+          $("#retype_password_error").show();
+          error_retype_password=true;
+        }
+        else{
+          $("#retype_password_error").hide();
+        }
+      }
+      $("#form1").click(function(){
+        error_firstname=false;
+        error_lasttname=false;
+        error_mobile=false;
+        error_email=false;
+        error_password=false;
+        error_retype_password=false;
+
+        check_password();
+        check_email();
+        check_mobile();
+        check_lastname();
+        check_firstname();
+        check_retype_password();
+
+        if(error_firstname==false && error_lasttname==false && error_mobile==false && error_email==false && error_password==false && error_retype_password==false)
+          return true;
+        else{
+          return false;
+        }
+      });
+    });
+  }); 
+  </script>
+    <title>Hello, world!</title>
+</head>
+
+<body >
+    <nav id="navbar">
+        <div class="container" style="height: 200px">
+        <img src="{{url_for('static', filename='logo.jpg')}}" alt="" width="100" height="100"style="padding: 10px">
+            <ul>
+              <li><a href="{{url_for('home')}}">Home</a></li>
+              <li><a href="#">Asha Workers</a></li>
+              <li><a href="{{url_for('login')}}">Children</a></li>
+              <li><a href="{{url_for('register')}}">Visualization</a></li>
+            </ul>
+        </div>
+    </nav>
+    <form class="box" name="myForm" id="form1" method="post" action="{{ url_for('addAshaWorker') }}">
+      <h1>Register</h1>
+      <br>
+      <input type="text" class="form_text" id="form_firstname" placeholder="Name" required><span class="error_form" id="firstname_error"></span>
+      <input type="text" class="form_text" placeholder="Email Id" required><span class="error_form" id="email_error"></span>
+      <input type="number" class="form_text" placeholder="Mobile No." required><span class="error_form" id="mobile_error"></span>
+      <input type="number" class="form_text" placeholder="City" required><span class="error_form"></span>
+      <input type="number" class="form_text" placeholder="Pincode" required><span class="error_form"></span>
+      <input type="text" class="form_text" id="form_firstname" placeholder="User Id" required><span class="error_form" id="firstname_error"></span>
+      <input type="password" class="form_text" id="form_firstname" placeholder="Password" required><span class="error_form" id="firstname_error"></span>
+    <button type="submit" class="submit_btn"form="form1">SUBMIT</button>
+    </form>    
+                
+</body>
+</html>

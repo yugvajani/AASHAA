@@ -1,0 +1,283 @@
+{% extends 'parenthome.html' %}
+{% block title %}Add Child{% endblock %}
+{% block content%}
+<!-- <div class="login" style="margin:50px;text-align: center;">
+    <div class="card" style="width: 26rem; height: 270px; text-align: center;margin-left: 450px;box-shadow: 2px 2px 4px #bdbdbd;">
+      <div class="card-body">
+        <b><h3>Register</h3><b><br>
+        <form action="{{ url_for('addchildren') }}" method="post">
+          <input type="text" class="form-control" name='name' id='fname' placeholder="Name" style="margin-bottom: 10px;">
+          <input type="text" class="form-control" name='dob' id='dob' placeholder="YYYY-MM-DD" style="margin-bottom: 10px;"> 
+          <input type = "hidden" value = "" name = "imgUrl" id = "imgUrl">
+          <br><button id = "RegisterButton" type="submit" class="btn btn-dark" style="background-color:#e7305b ;color: white;border-color:#e7305b;">SUBMIT</button>
+  </form>
+  </div>  
+  </div>  -->
+  <section>
+    <form class="box" name="myForm" id="form1" method="post">
+      <h1>REGISTER</h1>
+      <br>
+      <input type="text" class="form_text" id="fname" placeholder="Name" name="name" required><span class="error_form" id="firstname_error"></span>
+      <input type="text" class="form_text" id="dob" placeholder="YYYY-MM-DD" name="dob" required><span class="error_form" id="firstname_error"></span>
+      <input type = "hidden" value = "" name = "imgUrl" id = "imgUrl">
+          <br><button id = "RegisterButton" type="submit" class="btn btn-dark" style="background-color:#e7305b ;color: white;border-color:#e7305b;">SUBMIT</button>
+    </form>
+</section>  
+<section>
+    <div class = "container-fluid" style="padding:128px 16px;margin-top: 25%">
+        <div class = "row justify-content-center">
+            <div class = "mx-lg-4 col-lg-4 col-md-12">
+                <h3 style="text-align: center"> Upload Poster</h3>
+                <h4 style="text-align: center">(JPEG , PNG format accepted)</h4>
+                <br>
+                    <input type="file"  id="imgposter" name="imgposter" accept="image/png, image/jpeg" onchange = "imageLoader()">
+                <br><br>
+                <script>
+                    function imageLoader(){
+                            var preview = document.getElementById('poster');
+                            var file    = document.querySelector('input[type=file]').files[0];
+                            var reader  = new FileReader();
+                            
+                            reader.onloadend = function () {
+                                preview.src = reader.result;
+                            }
+                            
+                            if (file) {
+                                reader.readAsDataURL(file);
+                            } else {
+                                preview.src = "";
+                            }
+                        }
+                </script>
+                <img src = "" class = "img img-fluid" alt = "poster" id = "poster">
+                <br><br>
+                <input type = "submit" name = "action" value = "Upload" id = "uploadImg">
+                <br><br>
+                <h5 style = "color : #ff0000">(Please upload the poster to make the event registeration button visible)</h5>
+            </div>
+  </div> 
+</section>
+  <style >
+      .box{
+  margin-top: 5%;
+  width: 700px;
+  height: auto;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  border:solid black 3px;
+
+  /*background: #505050;*/
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "text"],.box input[type = "text"],.box input[type = "password"],.box input[type = "number"],.box input[type="date"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid: #3498db;
+  border-color: #3498db;
+  padding: 14px 10px;
+  width: 500px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s; 
+}
+.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "password"]:focus,.box input[type = "number"]:focus,.box input[type="date"]:focus{
+  width: 560px;
+  border-color: #2ecc71;
+}
+.box button[type ="submit"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid:#2ecc71;
+  border-color: #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s; 
+  cursor: pointer;
+}
+.box button[type ="submit"]:hover{
+  background:#2ecc71;
+}
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script>
+  <script>
+var registerButton = document.getElementById("RegisterButton")
+registerButton.style.display = "None"
+var uploadButton = document.getElementById("uploadImg")
+
+firebase.initializeApp(firebaseConfig);
+var storage = firebase.storage();
+var storageRef = firebase.storage().ref();
+
+function generateUUID() {
+    var d = new Date().getTime();
+    var d2 = (performance && performance.now && (performance.now()*1000)) || 0;
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;
+        if(d > 0){
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+
+uploadButton.addEventListener("click" , function() {
+
+    id = generateUUID();
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader()
+    
+    if(file){
+        reader.readAsDataURL(file);
+        var path = "/Events/" + String(id);
+        var ref = storage.ref(path);
+        ref.put(file).then((snapshot) => {
+            console.log('Uploaded img');
+            storageRef.child(path).getDownloadURL().then((url) => {
+                console.log(url)
+                document.getElementById("imgUrl").value = url
+            });
+            alert("Image Upload Successful")
+            registerButton.style.display = ""
+        });
+    }
+});
+$(document).ready(function()
+    {
+        $("button").click(function()
+        {
+        $("#firstname_error").hide();
+        $("#lasttname_error").hide();
+        $("#mobile_error").hide();
+        $("#email_error").hide();
+        $("#password_error").hide();
+        $("#retype_password_error").hide();
+
+      var error_firstname=false;
+      var error_lasttname=false;
+      var error_mobile=false;
+      var error_email=false;
+      var error_password=false;
+      var error_retype_password=false;
+
+      $("#form_firstname").focusout(function(){
+        check_firstname();
+      });
+
+      $("#form_lasstname").focusout(function(){
+        check_lastname();
+      });
+
+      $("#form_mobile").focusout(function(){
+        check_mobile();
+      });
+
+      $("#form_email").focusout(function(){
+        check_email();
+      });
+      $("#form_password").focusout(function(){
+        check_password();
+      });
+      $("#form_retype_password").focusout(function(){
+        check_retype_password();
+      });
+      function check_firstname(){
+        var fname=new RegExp(/^[+a-zA-Z]+$/i);
+        if(fname.test($("#form_firstname").val())){
+          $("#firstname_error").hide();
+        }else{
+          $("#firstname_error").html("Invalid email address");
+          $("#firstname_error").show();
+          error_firstname=true;
+        }
+      }
+      function check_mobile(){
+        var mobile=new RegExp(/^[0-9]{10}$/i);
+        if(mobile.test("#form_mobile").val()){
+          $("#mobile_error").hide();
+        }else{
+          $("#mobile_error").html("Invalid email address");
+          $("#mobile_error").show();
+          error_mobile=true;
+        }
+      }
+      
+      function check_email(){
+        var pattern=new RegExp(/^[+a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/i);
+        if(pattern.test("#form_email").val()){
+          $("#email_error").hide();
+        }else{
+          $("#email_error").html("Invalid email address");
+          $("#email_error").show();
+          error_email=true;
+        }
+      }
+      function check_password(){
+        var password_length = $("#form_password").val().length;
+        if(password_length<8){
+          $("#password_error").html("At least 8 characters");
+          $("#password_error").show();
+          error_password=true;
+        }
+        else{
+          $("#password_error").hide();
+        }
+      }
+      function check_retype_password(){
+        var password= $("#form_password").val();
+        var retype_password= $("#form_retype_password").val();
+        if(password!= retype_password){
+          $("#retype_password_error").html("Passwords do not match");
+          $("#retype_password_error").show();
+          error_retype_password=true;
+        }
+        else{
+          $("#retype_password_error").hide();
+        }
+      }
+      $("#form1").click(function(){
+        error_firstname=false;
+        error_lasttname=false;
+        error_mobile=false;
+        error_email=false;
+        error_password=false;
+        error_retype_password=false;
+
+        check_password();
+        check_email();
+        check_mobile();
+        check_lastname();
+        check_firstname();
+        check_retype_password();
+
+        if(error_firstname==false && error_lasttname==false && error_mobile==false && error_email==false && error_password==false && error_retype_password==false)
+          return true;
+        else{
+          return false;
+        }
+      });
+    });
+  }); 
+  </script>
+{%endblock%}

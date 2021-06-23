@@ -1,0 +1,344 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {% block head %}
+          {% endblock %}
+          <style >
+            .mainBody{
+    height: 470px;
+    background-color: rgb(252, 250, 248);
+}
+.bottomBar{
+    height:30px;
+    background-color: rgb(50, 53, 53);
+}
+.topbar{
+    background-color: rgb(50, 53, 53); 
+    text-align: center;
+    color: white;
+    padding: 2px;
+    margin-top: 90px;
+    height: 60px;
+    padding: 20px;
+}
+.bottomText{
+    font-family: cursive;
+    text-align: center;
+    color: rgb(219, 202, 202);
+}
+.imgSize{
+    height: 470px;
+}
+body{
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(226,226,226);
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* utilities */
+.container{
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* top header */
+
+/* navbar and logo */
+nav{
+  border-top: 2px solid rgb(95, 94, 94);
+  background-color: rgb(226,226,226);
+}
+.logo{
+  float: left;
+  width: 100px;
+}
+ul{
+  margin-left: 350px;
+  margin-top:-80px;
+}
+ul{
+  list-style-type: none;
+}
+li{
+  float: left;
+  font-size: 18px;
+  padding-top: 23px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 3% ;
+  margin-left: 40px;
+}
+ul li a{
+  padding: 13px;
+  text-decoration: none;
+  color: black;
+}
+ul li a:hover{
+  color: red;
+  transition: 0.9s;
+}
+
+.dropbtn {
+  color: black;
+  padding: 16px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.box{
+  margin-top: 70%;
+  width: 700px;
+  height: auto;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  border:solid black 3px;
+
+  /*background: #505050;*/
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "text"],.box input[type = "text"],.box input[type = "password"],.box input[type = "number"],.box input[type="date"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid: #3498db;
+  border-color: #3498db;
+  padding: 14px 10px;
+  width: 500px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s; 
+}
+.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "text"]:focus,.box input[type = "password"]:focus,.box input[type = "number"]:focus,.box input[type="date"]:focus{
+  width: 560px;
+  border-color: #2ecc71;
+}
+.box button[type ="submit"]{
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 20px solid:#2ecc71;
+  border-color: #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s; 
+  cursor: pointer;
+}
+.box button[type ="submit"]:hover{
+  background:#2ecc71;
+}
+</style>
+<script>
+    $(document).ready(function()
+    {
+        $("button").click(function()
+        {
+        $("#firstname_error").hide();
+        $("#lasttname_error").hide();
+        $("#mobile_error").hide();
+        $("#email_error").hide();
+        $("#password_error").hide();
+        $("#retype_password_error").hide();
+
+      var error_firstname=false;
+      var error_lasttname=false;
+      var error_mobile=false;
+      var error_email=false;
+      var error_password=false;
+      var error_retype_password=false;
+
+      $("#form_firstname").focusout(function(){
+        check_firstname();
+      });
+
+      $("#form_lasstname").focusout(function(){
+        check_lastname();
+      });
+
+      $("#form_mobile").focusout(function(){
+        check_mobile();
+      });
+
+      $("#form_email").focusout(function(){
+        check_email();
+      });
+      $("#form_password").focusout(function(){
+        check_password();
+      });
+      $("#form_retype_password").focusout(function(){
+        check_retype_password();
+      });
+      function check_firstname(){
+        var fname=new RegExp(/^[+a-zA-Z]+$/i);
+        if(fname.test($("#form_firstname").val())){
+          $("#firstname_error").hide();
+        }else{
+          $("#firstname_error").html("Invalid email address");
+          $("#firstname_error").show();
+          error_firstname=true;
+        }
+      }
+      function check_mobile(){
+        var mobile=new RegExp(/^[0-9]{10}$/i);
+        if(mobile.test("#form_mobile").val()){
+          $("#mobile_error").hide();
+        }else{
+          $("#mobile_error").html("Invalid email address");
+          $("#mobile_error").show();
+          error_mobile=true;
+        }
+      }
+      
+      function check_email(){
+        var pattern=new RegExp(/^[+a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/i);
+        if(pattern.test("#form_email").val()){
+          $("#email_error").hide();
+        }else{
+          $("#email_error").html("Invalid email address");
+          $("#email_error").show();
+          error_email=true;
+        }
+      }
+      function check_password(){
+        var password_length = $("#form_password").val().length;
+        if(password_length<8){
+          $("#password_error").html("At least 8 characters");
+          $("#password_error").show();
+          error_password=true;
+        }
+        else{
+          $("#password_error").hide();
+        }
+      }
+      function check_retype_password(){
+        var password= $("#form_password").val();
+        var retype_password= $("#form_retype_password").val();
+        if(password!= retype_password){
+          $("#retype_password_error").html("Passwords do not match");
+          $("#retype_password_error").show();
+          error_retype_password=true;
+        }
+        else{
+          $("#retype_password_error").hide();
+        }
+      }
+      $("#form1").click(function(){
+        error_firstname=false;
+        error_lasttname=false;
+        error_mobile=false;
+        error_email=false;
+        error_password=false;
+        error_retype_password=false;
+
+        check_password();
+        check_email();
+        check_mobile();
+        check_lastname();
+        check_firstname();
+        check_retype_password();
+
+        if(error_firstname==false && error_lasttname==false && error_mobile==false && error_email==false && error_password==false && error_retype_password==false)
+          return true;
+        else{
+          return false;
+        }
+      });
+    });
+  }); 
+  </script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">GiftAbled</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="allAsha">Asha Workers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="children">Children</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link " href="visual">Visualization</a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+ -->
+ <nav id="navbar">
+        <div class="container" style="height: 200px">
+        <img src="{{url_for('static', filename='logo.jpg')}}" alt="" width="100" height="100"style="padding: 10px">
+            <ul>
+              <li><a href="{{url_for('home')}}">Home</a></li>
+              <li><a href="#">Asha Workers</a></li>
+              <li><a href="{{url_for('login')}}">Children</a></li>
+              <li><a href="{{url_for('register')}}">Visualization</a></li>
+            </ul>
+        </div>
+    </nav>
+      {% block content %}
+          {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</body>
+</html>

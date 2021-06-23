@@ -1,0 +1,40 @@
+{% extends 'adminhome.html' %}
+
+{%block head%}
+
+<style>table, th, td {
+    margin: auto;
+    border: 1px solid black;
+    padding: 10px;
+    
+  }</style>
+{%endblock%}
+
+{% block content%}
+
+<table cellpadding>
+
+    <tr>
+        <td>Parent's Name</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <!-- <td>Location</td> -->
+        
+    </tr>
+
+    {%for i in children:%}
+    
+    <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.phone}}</td>
+        
+    </tr>
+    
+  
+    
+{%endfor%}
+</table>
+
+
+{% endblock %}
